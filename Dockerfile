@@ -5,7 +5,7 @@ MAINTAINER saymagic "zhuxiaole@zhuxiaole.org"
 
 #安装ssh服务
 # Install packages
-RUN apt-get update && apt-get -y install openssh-server pwgen && \
+RUN apt-get update && apt-get -y install sudo openssh-server pwgen && \
     mkdir -p /var/run/sshd && \
     sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config && \
     sed -i "s/PermitRootLogin without-password/PermitRootLogin yes/g" /etc/ssh/sshd_config
@@ -14,6 +14,7 @@ ADD set_ssh_pw.sh /set_ssh_pw.sh
 ADD run.sh /run.sh
 RUN chmod +x /*.sh
 
+ENV SSH_USER ssh_user
 ENV AUTHORIZED_KEYS **None**
 
 ENV DEPENDENCIES git-core build-essential autoconf libtool libssl-dev libpcre3-dev asciidoc xmlto
