@@ -43,6 +43,10 @@ WORKDIR /
 RUN rm -rf $BASEDIR/shadowsocks-libev\
  && apt-get --purge autoremove -y $DEPENDENCIES
 
+#安装相关工具
+RUN apt-get update && apt-get install net-tools
+RUN apt-get update && apt-get install vim -y
+
 EXPOSE 22
 EXPOSE $SERVER_PORT/tcp
 EXPOSE $SERVER_PORT/udp
